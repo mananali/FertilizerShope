@@ -1,0 +1,64 @@
+﻿@model FertilizerShopWeb.Models.User
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <!-- Centered Card with Shadow -->
+            <div class="card shadow-lg">
+                <!-- Colored Header -->
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Register New User</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter full name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Role" class="form-label">Role</label>
+                            <select asp-for="Role" class="form-select" asp-items="new SelectList(ViewBag.Roles)">
+                                <option value="">-- Select Role --</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+
+                        <!-- Large Green Submit Button -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Register</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <!-- Footer with Login Link -->
+                <div class="card-footer text-center text-muted">
+                    Already have an account? <a asp-controller="Account" asp-action="Login">Login here</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

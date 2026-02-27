@@ -1,0 +1,101 @@
+﻿@model FertilizerShopWeb.Models.Product
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+
+            <!-- Centered Card with Shadow -->
+            <div class="card shadow-lg">
+                <!-- Header -->
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Add New Product</h3>
+                </div>
+
+                <div class="card-body">
+
+                    @* Display any errors *@
+                    @if (ViewBag.Errors != null)
+                    {
+                        <ul class="text-danger">
+                            @foreach (var err in ViewBag.Errors)
+                            {
+                                <li>@err</li>
+                            }
+                        </ul>
+                    }
+
+                    @if (ViewBag.DbError != null)
+                    {
+                        <div class="text-danger mb-3">
+                            DB Error: @ViewBag.DbError
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post">
+
+                        <!-- Product Name -->
+                        <div class="mb-3">
+                            <label asp-for="ProductName" class="form-label"></label>
+                            <input asp-for="ProductName" class="form-control" placeholder="Enter product name" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Company Dropdown -->
+                        <div class="mb-3">
+                            <label>Company</label>
+                            <select asp-for="CompanyId" class="form-control" asp-items="ViewBag.Companies">
+                                <option value="">-- Select Company --</option>
+                            </select>
+                            <span asp-validation-for="CompanyId" class="text-danger"></span>
+                        </div>
+
+                        <!-- Product Type -->
+                        <div class="mb-3">
+                            <label asp-for="ProductType" class="form-label"></label>
+                            <select asp-for="ProductType" class="form-control">
+                                <option value="">-- Select Type --</option>
+                                <option>Seed</option>
+                                <option>Urea</option>
+                                <option>DAP</option>
+                                <option>NPK</option>
+                                <option>SSP</option>
+                            </select>
+                            <span asp-validation-for="ProductType" class="text-danger"></span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-3">
+                            <label asp-for="Price" class="form-label"></label>
+                            <input asp-for="Price" class="form-control" placeholder="Enter product price" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <!-- Stock Quantity -->
+                        <div class="mb-3">
+                            <label asp-for="StockQty" class="form-label"></label>
+                            <input asp-for="StockQty" class="form-control" placeholder="Enter stock quantity" />
+                            <span asp-validation-for="StockQty" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-3">
+                            <button type="submit" class="btn btn-success btn-lg">Save Product</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer text-center text-muted">
+                    <a asp-controller="Product" asp-action="Index">Back to Product List</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,86 @@
+﻿@* 
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+@{
+}
+
+@model IEnumerable<FertilizerShopWeb.Models.Invoice>
+
+<h2>Invoice List</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-2">New Invoice</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Invoice No</th>
+        <th>Date</th>
+        <th>Total</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.InvoiceNo</td>
+            <td>@item.InvoiceDate</td>
+            <td>@item.TotalAmount</td>
+            <!-- ✅ Add View / Print button here -->
+            <td>
+                <a asp-action="Details" asp-route-id="@item.InvoiceId"
+                   class="btn btn-sm btn-info">
+                    View / Print
+                </a>
+            </td>
+        </tr>
+    }
+</table> *@
+@using Microsoft.AspNetCore.Http
+@model IEnumerable<FertilizerShopWeb.Models.Invoice>
+
+<h2>Invoice List</h2>
+
+@if (Context.Session.GetString("UserRole") == "Admin")
+{
+    <a asp-action="Create" class="btn btn-success mb-2">New Invoice</a>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Invoice No</th>
+            <th>Date</th>
+            <th>GrandTotal</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var invoice in Model)
+        {
+            <tr>
+                <td>@invoice.InvoiceNo</td>
+                <td>@invoice.InvoiceDate.ToString("dd-MM-yyyy")</td>
+                <td>@invoice.GrandTotal</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@invoice.InvoiceId" class="btn btn-info btn-sm">
+                        View / Print
+                    </a>
+                    @* Only admin can see Edit and Delete *@
+                    @if (Context.Session.GetString("UserRole") == "Admin")
+                    {
+                        <a asp-action="Edit" asp-route-id="@invoice.InvoiceId" class="btn btn-warning btn-sm">Edit</a>
+
+                        <form asp-action="Delete" asp-route-id="@invoice.InvoiceId" method="post" style="display:inline-block">
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure you want to delete this invoice?');">
+                                Delete
+                            </button>
+                        </form>
+                    }
+
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

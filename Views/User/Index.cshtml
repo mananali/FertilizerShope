@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FertilizerShopWeb.Models.User>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<h2>All Registered Users</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            int serial = 1;
+            foreach (var u in Model)
+            {
+                <tr>
+                    <td>@serial</td>
+                    <td>@u.Name</td>
+                    <td>@u.Email</td>
+                    <td>@u.Role</td>
+                </tr>
+                serial++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">No users found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

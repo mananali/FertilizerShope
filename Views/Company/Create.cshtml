@@ -1,0 +1,88 @@
+﻿@model FertilizerShopWeb.Models.Company
+
+@{
+    ViewData["Title"] = "Add Company";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- Card wrapper -->
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-success text-white text-center">
+                    <h3 class="mb-0">Add New Company</h3>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+
+                        <!-- Company Name -->
+                        <div class="mb-3">
+                            <label asp-for="CompanyName" class="form-label fw-bold"></label>
+                            <input asp-for="CompanyName" class="form-control form-control-lg" placeholder="Enter company name" />
+                            <span asp-validation-for="CompanyName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Company Type -->
+                        <div class="mb-3">
+                            <label asp-for="CompanyType" class="form-label fw-bold"></label>
+                            <select asp-for="CompanyType" class="form-select form-select-lg">
+                                <option value="">-- Select Type --</option>
+                                <option>Seed</option>
+                                <option>Fertilizer</option>
+                                <option>Chemicals</option>
+                            </select>
+                            <span asp-validation-for="CompanyType" class="text-danger"></span>
+                        </div>
+
+                        <!-- Contact Person -->
+                        <div class="mb-3">
+                            <label asp-for="ContactPerson" class="form-label fw-bold"></label>
+                            <input asp-for="ContactPerson" class="form-control form-control-lg" placeholder="Enter contact person name" />
+                            <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                        </div>
+
+                        <!-- Contact Number -->
+                        <div class="mb-3">
+                            <label asp-for="ContactNumber" class="form-label fw-bold"></label>
+                            <input asp-for="ContactNumber" class="form-control form-control-lg" placeholder="Enter contact number" />
+                            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold"></label>
+                            <input asp-for="Email" class="form-control form-control-lg" placeholder="Enter email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label fw-bold"></label>
+                            <input asp-for="Address" class="form-control form-control-lg" placeholder="Enter address" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <!-- Is Active -->
+                        <div class="form-check form-switch mb-4">
+                            <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                            <label asp-for="IsActive" class="form-check-label fw-bold">Active</label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold">Save Company</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

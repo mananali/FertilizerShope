@@ -1,0 +1,209 @@
+﻿@* 
+
+@model FertilizerShopWeb.Models.Invoice
+
+<h2>Invoice Details</h2>
+
+<p>
+    Invoice No: <b>@Model.InvoiceNo</b><br />
+    Date: @Model.InvoiceDate.ToString("dd-MM-yyyy")
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Qty</td>
+                <td>@item.Rate</td>
+                <td>@item.Amount</td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" class="text-right"><b>Grand Total</b></td>
+            <td><b>@Model.GrandTotal.ToString("0.00")</b></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-2">
+    <button onclick="window.print()" class="btn btn-primary">Print Invoice</button>
+</div>
+ *@
+
+
+@model Invoice
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Invoice</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+        }
+        .invoice-box {
+            width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border: 1px solid #ddd;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 90px;
+        }
+        .company {
+            margin-left: 15px;
+        }
+        .company h1 {
+            color: #2e7d32;
+            margin: 0;
+        }
+        .line {
+            border-top: 2px solid #2e7d32;
+            margin: 15px 0;
+        }
+        .info {
+            display: flex;
+            justify-content: space-between;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th {
+            background: #2e7d32;
+            color: white;
+            padding: 8px;
+            border: 1px solid #999;
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #999;
+            text-align: center;
+        }
+        .total-table {
+            width: 40%;
+            margin-left: auto;
+            margin-top: 20px;
+        }
+        .total-table td {
+            border: none;
+            padding: 6px;
+        }
+        .grand {
+            background: #e8f5e9;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .print-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+        @@media print {
+            .print-btn { display: none; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="invoice-box">
+
+        <div class="header">
+            <img src="@Url.Content("/img/filelogo.png")" class="logo" />
+            <div class="company">
+                <h1>Bhai Bhai Fertilizer</h1>
+                <p>Dist: Coochbehar,Balarampur,P.S-Tufanganj</p>
+                <p>Phone:+91 9933329102</p>
+                <p>Email: BhaiBhaiFertilizer@gmail.com</p>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="info">
+            <div>
+                <p><b>Invoice No:</b> @Model.InvoiceNo</p>
+                <p><b>Date:</b> @Model.InvoiceDate.ToString("dd-MMM-yyyy")</p>
+            </div>
+            <div>
+                <p><b>Customer Name:</b> @Model.CustomerName</p>
+                <p><b>Customer Contact:</b> @Model.CustomerContact</p>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <th>SL</th>
+                <th>Product Name</th>
+                <th>Qty (kg)</th>
+                <th>Rate (₹/kg)</th>
+                <th>Amount (₹)</th>
+            </tr>
+
+            @for (int i = 0; i < Model.Items.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@Model.Items[i].ProductName</td>
+                    <td>@Model.Items[i].Qty</td>
+                    <td>@Model.Items[i].Rate</td>
+                    <td>@Model.Items[i].Amount</td>
+                </tr>
+            }
+        </table>
+
+        <table class="total-table">
+            <tr>
+                <td>Subtotal:</td>
+                <td>₹ @Model.SubTotal</td>
+            </tr>
+            <tr>
+                <td>VAT (5%):</td>
+                <td>₹ @Model.Vat</td>
+            </tr>
+            <tr class="grand">
+                <td>Grand Total:</td>
+                <td>₹ @Model.GrandTotal</td>
+            </tr>
+        </table>
+
+        <div class="footer">
+            <p><i>Thank you for your business!</i></p>
+            <p>www.bhaibhaifertilizer.com</p>
+        </div>
+
+        <div class="print-btn">
+            <button onclick="window.print()">Print Invoice</button>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+

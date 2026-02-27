@@ -1,0 +1,119 @@
+﻿@* @model IEnumerable<FertilizerShopWeb.Models.Product>
+@{
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<h2>Product List</h2>
+
+<!-- ✅ Add Product button (Admin only) -->
+@if (userRole == "Admin")
+{
+    <a asp-action="Create" class="btn btn-success mb-2">Add Product</a>
+}
+
+<!-- ✅ Export All Invoices PDF button -->
+@if (!string.IsNullOrEmpty(userRole))
+{
+    <a asp-controller="Invoice" asp-action="ExportPdf" class="btn btn-warning mb-2">
+        Export All Invoices PDF
+    </a>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Stock</th>
+            @if (userRole == "Admin")
+            {
+                <th>Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductName</td>
+                <td>@p.ProductType</td>
+                <td>@p.Price</td>
+                <td>@p.StockQty</td>
+
+                @if (userRole == "Admin")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-primary">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@p.ProductId" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Are you sure?')">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+@model IEnumerable<FertilizerShopWeb.Models.Product>
+@{
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+<h2>Product List</h2>
+
+<!-- Add Product button (Admin only) -->
+@if (userRole == "Admin")
+{
+    <a asp-action="Create" class="btn btn-success mb-2">Add Product</a>
+}
+
+<!-- Export All Invoices PDF button -->
+@if (!string.IsNullOrEmpty(userRole))
+{
+    <a asp-controller="Invoice" asp-action="ExportPdf" class="btn btn-warning mb-2">
+        Export All Invoices PDF
+    </a>
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Price</th>
+            <th>Stock</th>
+            @if (userRole == "Admin")
+            {
+                <th>Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.ProductName</td>
+                <td>@p.ProductType</td>
+                <td>@p.Price</td>
+                <td>@p.StockQty</td>
+                @if (userRole == "Admin")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-primary">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@p.ProductId" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Are you sure?')">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

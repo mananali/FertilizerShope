@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+
+            <!-- Centered Card with Shadow -->
+            <div class="card shadow-lg">
+                <!-- Header -->
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Login to Fertilizer Shop</h3>
+                </div>
+
+                <div class="card-body">
+                    <form asp-action="Login" method="post">
+
+                        <!-- Email Field -->
+                        <div class="mb-3">
+                            <label>Email</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required />
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="mb-3">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Enter your password" required />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-3">
+                            <input type="submit" value="Login" class="btn btn-success btn-lg" />
+                        </div>
+
+                        <!-- Error Message -->
+                        <div class="text-danger mt-2 text-center">
+                            @ViewBag.Error
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer text-center text-muted">
+                    Don't have an account? <a asp-controller="User" asp-action="Register">Register here</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

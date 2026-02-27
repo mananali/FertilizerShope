@@ -1,0 +1,82 @@
+﻿@* @model FertilizerShopWeb.Models.Product
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="ProductId" />
+
+    <input asp-for="ProductName" class="form-control" />
+    <br />
+
+    <select asp-for="ProductType" class="form-control">
+        <option>Seed</option>
+        <option>Urea</option>
+        <option>DAP</option>
+        <option>NPK</option>
+    </select>
+    <br />
+
+    <input asp-for="Price" class="form-control" />
+    <br />
+
+    <input asp-for="StockQty" class="form-control" />
+    <br />
+
+    <button type="submit" class="btn btn-success">Update</button>
+
+</form> *@
+
+
+@model FertilizerShopWeb.Models.Product
+
+<h2>Edit Product</h2>
+
+<form asp-action="Edit" method="post">
+    <!-- Hidden field for ProductId -->
+    <input type="hidden" asp-for="ProductId" />
+
+    <!-- Product Name -->
+    <div class="form-group">
+        <label asp-for="ProductName"></label>
+        <input asp-for="ProductName" class="form-control" />
+        <span asp-validation-for="ProductName" class="text-danger"></span>
+    </div>
+
+    <!-- Product Type -->
+    <div class="form-group">
+        <label asp-for="ProductType"></label>
+        <input asp-for="ProductType" class="form-control" />
+        <span asp-validation-for="ProductType" class="text-danger"></span>
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <!-- Stock Quantity -->
+    <div class="form-group">
+        <label asp-for="StockQty"></label>
+        <input asp-for="StockQty" class="form-control" />
+        <span asp-validation-for="StockQty" class="text-danger"></span>
+    </div>
+
+    <!-- Company Dropdown -->
+    <div class="form-group">
+        <label>Company</label>
+        <select asp-for="CompanyId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Companies, "CompanyId", "CompanyName", Model.CompanyId))">
+            <option value="">-- Select Company --</option>
+        </select>
+        <span asp-validation-for="CompanyId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Product</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

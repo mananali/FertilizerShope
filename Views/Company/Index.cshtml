@@ -1,0 +1,47 @@
+﻿@model IEnumerable<FertilizerShopWeb.Models.Company>
+@{
+    var userRole = ViewBag.UserRole as string;
+}
+
+<h2>Companies</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Contact</th>
+            <th>Products Count</th>
+            @if (userRole == "Admin")
+            {
+                <th>Actions</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.CompanyName</td>
+                <td>@c.CompanyType</td>
+                <td>@c.ContactNumber</td>
+                <td>@c.Products?.Count ?? 0</td>
+
+                @if (userRole == "Admin")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@c.CompanyId" class="btn btn-sm btn-primary">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@c.CompanyId" method="post" style="display:inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (userRole == "Admin")
+{
+    <a asp-action="Create" class="btn btn-success">Add New Company</a>
+}

@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@* }
+@model IEnumerable<FertilizerShopWeb.Models.Invoice>
+
+<h2>All Invoices Report</h2>
+
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
+    <tr>
+        <th>Invoice No</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Products</th>
+    </tr>
+    @foreach (var inv in Model)
+    {
+        <tr>
+            <td>@inv.InvoiceNo</td>
+            <td>@inv.InvoiceDate.ToString("dd-MM-yyyy")</td>
+            <td>@inv.GrandTotal</td>
+            <td>
+                <ul>
+                    @foreach (var item in inv.Items)
+                    {
+                        <li>@item.Product.ProductName (Qty: @item.Qty)</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+</table>
+ *@
+@model IEnumerable<FertilizerShopWeb.Models.Invoice>
+
+<h2>All Invoices Report</h2>
+
+<table border="1" cellpadding="5" cellspacing="0" width="100%">
+    <tr>
+        <th>Invoice No</th>
+        <th>Date</th>
+        <th>Total</th>
+        <th>Products</th>
+    </tr>
+    @foreach (var inv in Model)
+    {
+        <tr>
+            <td>@inv.InvoiceNo</td>
+            <td>@inv.InvoiceDate.ToString("dd-MM-yyyy")</td>
+            <td>@inv.GrandTotal</td>
+            <td>
+                <ul>
+                    @foreach (var item in inv.Items)
+                    {
+                        <li>@(item.Product?.ProductName ?? "Unknown Product") (Qty: @item.Qty)</li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+</table>

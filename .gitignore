@@ -1,0 +1,52 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+.vscode/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Publish folder
+publish/
+*.pubxml
+*.publishproj
+
+# IIS Express
+IISExpress/
+
+# Azure
+*.azurePubxml
+
+# Node (if you add frontend later)
+node_modules/
+dist/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Environment files
+appsettings.Development.json
+appsettings.*.json
+
+# Migration snapshot (optional if you want)
+*.Designer.cs
+
+# Database
+*.mdf
+*.ldf

@@ -1,0 +1,74 @@
+﻿@* @model FertilizerShopWeb.Models.Company
+
+<h2>Edit Company</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CompanyId" />
+
+    <input asp-for="CompanyName" class="form-control" placeholder="Company Name" /><br />
+    <input asp-for="ContactPerson" class="form-control" placeholder="Contact Person" /><br />
+    <input asp-for="ContactNumber" class="form-control" placeholder="Phone" /><br />
+    <input asp-for="Address" class="form-control" placeholder="Address" /><br />
+
+    <button class="btn btn-primary">Update</button>
+</form> *@
+
+@model FertilizerShopWeb.Models.Company
+
+<h2>Edit Company</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="CompanyId" />
+
+    <div class="form-group">
+        <label asp-for="CompanyName"></label>
+        <input asp-for="CompanyName" class="form-control" />
+        <span asp-validation-for="CompanyName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CompanyType"></label>
+        <select asp-for="CompanyType" class="form-control">
+            <option value="">-- Select Type --</option>
+            <option>Seed</option>
+            <option>Fertilizer</option>
+            <option>Chemicals</option>
+        </select>
+        <span asp-validation-for="CompanyType" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContactPerson"></label>
+        <input asp-for="ContactPerson" class="form-control" />
+        <span asp-validation-for="ContactPerson" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ContactNumber"></label>
+        <input asp-for="ContactNumber" class="form-control" />
+        <span asp-validation-for="ContactNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group form-check">
+        <input asp-for="IsActive" class="form-check-input" type="checkbox" />
+        <label asp-for="IsActive" class="form-check-label"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Company</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
